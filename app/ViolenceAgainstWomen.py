@@ -8,5 +8,4 @@ class ViolenceAgainstWomen(BaseModel):
     MaritalStatus:	constr(strip_whitespace=True, alias="Marital Status")
     Employment: constr(strip_whitespace=True)
     Residence: constr(strip_whitespace=True) 
-    SurveyYear:	conint(ge=0, alias="Survey Year")
     Question:constr(strip_whitespace=True)
