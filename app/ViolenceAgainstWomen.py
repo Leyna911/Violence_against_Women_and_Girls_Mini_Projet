@@ -1,11 +1,6 @@
-from pydantic import BaseModel, constr, conint
+from pydantic import BaseModel
 
 
-class ViolenceAgainstWomen(BaseModel):
-    Country: constr(strip_whitespace=True)
-    Age:constr(strip_whitespace=True)
-    Education:	constr(strip_whitespace=True) 
-    MaritalStatus:	constr(strip_whitespace=True, alias="Marital Status")
-    Employment: constr(strip_whitespace=True)
-    Residence: constr(strip_whitespace=True) 
-    Question:constr(strip_whitespace=True)
+class CountryInput(BaseModel):
+    Country: str
+    
