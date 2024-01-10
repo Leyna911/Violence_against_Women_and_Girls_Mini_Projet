@@ -48,39 +48,26 @@ def get_name(name: str):
 @app.post("/predict")
 def get_frequent_itemsets_and_rules_by_country(country_input: CountryInput):
     print(f"Received POST request for country: {country_input.Country}")
-
     country_name = country_input.Country
-
-    try:
-        if country_name not in loaded_Models:
+    
+    if country_name not in loaded_Models:
             raise HTTPException(status_code=404, detail="Country not found in dataset")
-
+    try:
         country_model = loaded_Models[country_name]
         itemsets = country_model["itemsets"]
-        rules = country_model["rules"]
-
+        #rules = country_model["rules"]
+        #rules_as_list = [list(rule) for rule in rules['antecedents']]
         itemsets_as_list = [list(itemset) for itemset in itemsets['itemsets']]
-        rules_as_list = [list(rule) for rule in rules['itemsets']]
-        
+        #rules_as_list = [list(rule) for rule in rules['itemsets']]
+            
         response_data = {
             "country": country_name,
-            "frequent_itemsets": itemsets_as_list,
-            "association_rules": rules_as_list
+            "frequent_itemsets": itemsets_as_list
+            #"association_rules": rules_as_list
         }
-
-        return JSONResponse(content=response_data)
-
-    except RequestValidationError as e:
-        print(f"Validation error: {e}")
-        return JSONResponse(content={"error": "Invalid request payload"}, status_code=400)
-
-    except HTTPException as e:
-        print(f"HTTPException: {e}")
-        return JSONResponse(content={"error": str(e.detail)}, status_code=e.status_code)
-
+        return JSONResponse( response_data)
     except Exception as e:
-        print(f"An unexpected error occurred: {str(e)}")
-        return JSONResponse(content={"error": "Internal server error"}, status_code=500)
+        return e
 
     
 if __name__ == '__main__': 
