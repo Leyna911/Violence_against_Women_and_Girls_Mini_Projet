@@ -4,8 +4,10 @@ import Map from './Components/map';
 
 function App() {
   return (
-    <div>
-      <h1>hey </h1>
+    <div className='flex flex-col items-center justify-center ' >
+      <div>
+            <h1 className=''>This Map represents the world map</h1>
+        </div>
       <Map/>
     </div>
   );

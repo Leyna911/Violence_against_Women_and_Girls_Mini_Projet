@@ -41,10 +41,6 @@ def index():
     return {"message":"home page"}
 
 
-@app.get('/{name}')
-def get_name(name: str):
-    return {'Welcome This dataset represent Violence Against Women and Girls in the world':f'{name}'}
-
 @app.post("/predict")
 def get_frequent_itemsets_and_rules_by_country(country_input: CountryInput):
     print(f"Received POST request for country: {country_input.Country}")
@@ -55,15 +51,24 @@ def get_frequent_itemsets_and_rules_by_country(country_input: CountryInput):
     try:
         country_model = loaded_Models[country_name]
         itemsets = country_model["itemsets"]
-        #rules = country_model["rules"]
-        #rules_as_list = [list(rule) for rule in rules['antecedents']]
+        rules = country_model["rules"]
+
         itemsets_as_list = [list(itemset) for itemset in itemsets['itemsets']]
-        #rules_as_list = [list(rule) for rule in rules['itemsets']]
-            
+    
+        support = itemsets["support"].astype(str)
+        support_as_list = support.tolist()
+        
+        confidence = rules["confidence"].astype(str)
+        confidence_as_list = confidence.tolist()
+        print(confidence_as_list)
+
         response_data = {
             "country": country_name,
-            "frequent_itemsets": itemsets_as_list
-            #"association_rules": rules_as_list
+            "frequent_itemsets": itemsets_as_list,
+            "support":support_as_list,
+            "confidence": confidence_as_list
+            
+           
         }
         return JSONResponse( response_data)
     except Exception as e:
