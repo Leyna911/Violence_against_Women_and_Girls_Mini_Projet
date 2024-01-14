@@ -21,7 +21,7 @@ const Map = () => {
     const [selectedCountry, setSelectedCountry] = useState(null)
     const [frequentItemsets, setFrequentItemsets] = useState([])
     const [support, setSupport] = useState([])
-   
+    
    
     
 
@@ -100,18 +100,18 @@ const Map = () => {
         </ComposableMap>
         
     </div>
+    <div>
     {frequentItemsets.length > 4 && (
   <div>
-    <h2>Frequent Itemsets</h2>
-    <ul>
+    <div className="mt-4 p-4 border-[2px] border-[#332929] rounded-md">
+    <h2 className="my-4 text-xl font-extrabold  dark:text-[#332929] md:text-xl lg:text-2xl w-[]">Frequent Itemsets with its respective support values.</h2>
+    <ul className='max-w-md mt-d divide-y'>
       {frequentItemsets
         .filter((itemset, index) => {
-          console.log('Itemset:', itemset);
-          console.log('Support:', support[index]);
           return itemset.length > 3 && parseFloat(support[index]) > 0.083;
         })
         .map((itemset, index) => (
-          <li key={index}>
+          <li key={index} className={`pb-3 mb-1 sm:pb-4 ${index % 2 === 0 ? 'bg-[#c52b2b]' : 'bg-[#b6b6b6]'} rounded p-4`}>
             {itemset
               .filter(item => item !== selectedCountry)
               .join(', ')}
@@ -121,7 +121,9 @@ const Map = () => {
         ))}
     </ul>
   </div>
+  </div>
 )}
+</div>
 
 
 
