@@ -1,16 +1,21 @@
 import './App.css';
-import Map from './Components/map';
+import MapTitle from './Components/MapTitle';
+import {BrowserRouter, Route, Routes} from "react-router-dom"
 
 
 function App() {
   return (
-    <div className='flex flex-col items-center justify-center ' >
-      <div>
-            <h1 className=''>This Map represents the world map</h1>
-        </div>
-      <Map/>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<MapTitle/>}/>
+      </Routes> 
+    </BrowserRouter>
+    
   );
 }
+
+{/*  */}
+
+
 
 export default App;

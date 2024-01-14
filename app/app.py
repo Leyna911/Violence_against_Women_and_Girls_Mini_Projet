@@ -55,18 +55,24 @@ def get_frequent_itemsets_and_rules_by_country(country_input: CountryInput):
 
         itemsets_as_list = [list(itemset) for itemset in itemsets['itemsets']]
     
-        support = itemsets["support"].astype(str)
+        support = itemsets["support"]
         support_as_list = support.tolist()
+        
         
         confidence = rules["confidence"].astype(str)
         confidence_as_list = confidence.tolist()
-        print(confidence_as_list)
+
+        lift = rules["lift"].astype(str)
+        lift_as_list = lift.tolist()
+    
+        print(f"the type of support is: {type(support)}")
 
         response_data = {
             "country": country_name,
             "frequent_itemsets": itemsets_as_list,
             "support":support_as_list,
-            "confidence": confidence_as_list
+            "confidence": confidence_as_list,
+            "lift": lift_as_list
             
            
         }
