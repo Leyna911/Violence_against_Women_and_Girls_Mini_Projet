@@ -52,7 +52,7 @@ def get_frequent_itemsets_and_rules_by_country(country_input: CountryInput):
         country_model = loaded_Models[country_name]
         itemsets = country_model["itemsets"]
         rules = country_model["rules"]
-        antecedents = rules["antecedents"].apply(lambda x: list(x))
+        # antecedents = rules["antecedents"].apply(lambda x: list(x))
         # consequents = rules["consequents"].apply(lambda x: list(x))
         support = itemsets["support"]
         confidence = rules["confidence"].astype(str)
@@ -78,9 +78,9 @@ def get_frequent_itemsets_and_rules_by_country(country_input: CountryInput):
             "support":support_as_list,
             "confidence": confidence_as_list,
             "lift": lift_as_list,
-            "antecedents": antecedents.tolist(),
+            # "antecedents": antecedents.tolist(),
             # "consequents": consequents.tolist()
-            # "rules": rules.to_dict(orient="records")
+            # # "rules": rules.to_dict(orient="records")
             
            
         }

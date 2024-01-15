@@ -21,6 +21,8 @@ const Map = () => {
     const [selectedCountry, setSelectedCountry] = useState(null)
     const [frequentItemsets, setFrequentItemsets] = useState([])
     const [support, setSupport] = useState([])
+    const [lift, setLift] =useState([])
+    const [confidence,setConfidence] = useState([])
     
    
     
@@ -36,6 +38,8 @@ const Map = () => {
         setFrequentItemsets(response.data.frequent_itemsets);
         setSupport(Array.from(response.data.support))
         setSelectedCountry(country)
+        setConfidence(Array.from(response.data.confidence))
+        setLift(Array.from(response.data.lift))
 
         
       } catch (error) {
@@ -104,25 +108,37 @@ const Map = () => {
     {frequentItemsets.length > 4 && (
   <div>
     <div className="mt-4 p-4 border-[2px] border-[#332929] rounded-md">
-    <h2 className="my-4 text-xl font-extrabold  dark:text-[#332929] md:text-xl lg:text-2xl w-[]">Frequent Itemsets with its respective support values.</h2>
-    <ul className='max-w-md mt-d divide-y'>
-      {frequentItemsets
-        .filter((itemset, index) => {
-          return itemset.length > 3 && parseFloat(support[index]) > 0.083;
-        })
-        .map((itemset, index) => (
-          <li key={index} className={`pb-3 mb-1 sm:pb-4 ${index % 2 === 0 ? 'bg-[#c52b2b]' : 'bg-[#b6b6b6]'} rounded p-4`}>
-            {itemset
-              .filter(item => item !== selectedCountry)
-              .join(', ')}
-            {" - "}
-            Support: {support[index]}
-          </li>
-        ))}
-    </ul>
-  </div>
+      <h2 className="my-4 text-xl font-extrabold dark:text-[#332929] md:text-xl lg:text-2xl w-[]">
+        Frequent Itemsets with its respective support, confidence, and lift values.
+      </h2>
+      <ul className="max-w-md mt-d divide-y">
+        {frequentItemsets
+          .filter((itemset, index) => {
+            return (
+              itemset.length > 3 &&
+              parseFloat(support[index]) > 0.016 &&
+              parseFloat(confidence[index]) > 0.5
+            );
+          })
+          .map((itemset, index) => (
+            <li
+              key={index}
+              className={`pb-3 mb-1 sm:pb-4 ${
+                index % 2 === 0 ? 'bg-[#c52b2b]' : 'bg-[#b6b6b6]'
+              } rounded p-4`}
+            >
+              {itemset
+                .filter(item => item !== selectedCountry)
+                .join(', ')}
+              {" - "}
+              Support: {support[index]} - Confidence: {confidence[index]} - Lift: {lift[index]}
+            </li>
+          ))}
+      </ul>
+    </div>
   </div>
 )}
+
 </div>
 
 
