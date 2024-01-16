@@ -49,7 +49,7 @@ const Map = () => {
 
   return (
     <div>
-    <div className="w-[1000px] border-double border-4 ">
+    <div className="border-double border-4 ">
        
        {content && (
         <div className="absolute  p-2 rounded shadow" style={{ top: "20px", left: "20px" }}>
@@ -107,11 +107,11 @@ const Map = () => {
     <div>
     {frequentItemsets.length > 4 && (
   <div>
-    <div className="mt-4 p-4 border-[2px] border-[#332929] rounded-md">
+    <div className="mt-4 p-4 border-[2px] border-[#ffdcdc]  rounded-md max-w-[1000px] mx-auto">
       <h2 className="my-4 text-xl font-extrabold dark:text-[#332929] md:text-xl lg:text-2xl w-[]">
         Frequent Itemsets with its respective support, confidence, and lift values.
       </h2>
-      <ul className="max-w-md mt-d divide-y">
+      <ul className=" mt-d divide-y flex flex-wrap  justify-center ">
         {frequentItemsets
           .filter((itemset, index) => {
             return (
@@ -123,21 +123,25 @@ const Map = () => {
           .map((itemset, index) => (
             <li
               key={index}
-              className={`pb-3 mb-1 sm:pb-4 ${
-                index % 2 === 0 ? 'bg-[#c52b2b]' : 'bg-[#b6b6b6]'
-              } rounded p-4`}
+              className={`pb-3 m-4 mb-1 sm:pb-4 shadow hover:shadow-xl transition duration-300 bg-[#ffeeee] ${
+                index % 2 === 0 ? 'bg-[#ffcbcb]' : 'bg-[#b6b6b6]'
+              } rounded p-4 w-[400px]`}
             >
               {itemset
                 .filter(item => item !== selectedCountry)
                 .join(', ')}
               {" - "}
-              Support: {support[index]} - Confidence: {confidence[index]} - Lift: {lift[index]}
+              <span className="font-bold">Support:</span> {support[index]} -{' '}
+              <span className="font-bold">Confidence:</span> {confidence[index]} -{' '}
+              <span className="font-bold">Lift:</span> {lift[index]}
             </li>
           ))}
       </ul>
     </div>
   </div>
 )}
+
+
 
 </div>
 
