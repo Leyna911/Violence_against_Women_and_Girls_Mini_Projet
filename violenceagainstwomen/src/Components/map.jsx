@@ -23,6 +23,7 @@ const Map = () => {
     const [support, setSupport] = useState([])
     const [lift, setLift] =useState([])
     const [confidence,setConfidence] = useState([])
+    const [colorClickedCountry,setColorClickedCountry] = useState([])
     
    
     
@@ -38,8 +39,10 @@ const Map = () => {
         setFrequentItemsets(response.data.frequent_itemsets);
         setSupport(Array.from(response.data.support))
         setSelectedCountry(country)
+        setColorClickedCountry([...colorClickedCountry,country])
         setConfidence(Array.from(response.data.confidence))
         setLift(Array.from(response.data.lift))
+        
 
         
       } catch (error) {
@@ -66,7 +69,11 @@ const Map = () => {
                         <Geography
                         key={geo.rsmKey}
                         geography={geo}
-                        fill="#cccccc"
+                        fill={
+                          colorClickedCountry.includes(geo.properties.name)
+                        ? "#E30000" // Red color for selected country
+                        : "#cccccc"
+                        }
                         stroke="#808080"
                         onMouseEnter={() => {
                           const countryName = geo.properties.name; 
