@@ -4,7 +4,7 @@ import joblib
 import pickle 
 from app.ViolenceAgainstWomen import CountryInput
 import pandas as pd 
-import os 
+import os
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.exceptions import RequestValidationError
@@ -21,7 +21,7 @@ app.add_middleware(
 )
 
 
-models_folder = "Models"
+models_folder = "./Models"
 
 loaded_Models = {}
 
