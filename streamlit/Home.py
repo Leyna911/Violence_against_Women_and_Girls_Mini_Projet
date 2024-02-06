@@ -1,33 +1,20 @@
 import streamlit as st 
-import pandas as pd
-import numpy as np
-from streamlit_option_menu import option_menu 
-import plotly.express as px
+import streamlit as st
+    
+def main():
+    st.set_page_config(page_title="SEDS Project App", page_icon=":rocket:")
+    
+    st.write("# Welcome to our Project! 👋")
 
-st.set_page_config(page_title="SEDS EXAM2",page_icon="",layout="wide",initial_sidebar_state="expanded" )
+    st.markdown(
+    """
+    This App demonstrates an unsupervised learning model using Association technique 🤖.
+    The goal was to find the frequent Itemsets and rules that provoqued violence against women and girls 👩👧 all around the world 
 
+"""
+)
+   
 
-
-
-
-
-def home_page():
-    st.title("TechBazaar Headphones :sunglasses:")
-    st.write("Welcome to the Home Page")
-    st.header('', divider='rainbow')
-
-
-home_page()
-
-
-
-
-
-
-
-
-
-
-
-
+if __name__ == "__main__":
+    main()
 
