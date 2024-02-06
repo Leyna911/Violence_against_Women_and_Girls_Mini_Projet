@@ -88,8 +88,6 @@ def training_page():
 
 
 
-   
-
 def export_model():
     df = training_page()
     if st.button("Export Models"):
